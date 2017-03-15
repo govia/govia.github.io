@@ -1,0 +1,229 @@
+<html>
+<head>
+    <meta charset="Unicode UTF-8">
+<title>Make your own SETrumps avatar</title>
+<style>
+input[type='text'] { font-size: 24px; font-family: '220px Segoe UI Emoji';}
+</style>      
+<script>
+
+function submitenter(myfield,e)
+{
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+else return true;
+
+if (keycode == 13)
+   {
+   
+   return false;
+   }
+else
+   return true;
+}
+var ctx;
+var imagesLoaded = 0;
+function main() {
+    imagesLoaded += 1;
+
+    
+}
+
+function loadImage(src, onload) {
+    // http://www.thefutureoftheweb.com/blog/image-onload-isnt-being-called
+    var img = new Image();
+
+    img.onload = onload;
+    img.src = src;
+
+    return img;
+}
+   function getLengthInBytes(str) {
+  var b = str.match(/[^\x00-\xff]/g);
+  return (str.length + (!b ? 0: b.length)); 
+}
+    
+    function render_pass(opt, text1, scl){
+        
+        x=140
+        if (opt==1){
+            y=130+scl*50
+        }else{
+            y=190+scl*50
+        }
+        
+        s='140px'
+        ctx.font= s+" Segoe UI Emoji"
+        //len=ctx.measureText(smiley).width
+ 
+        ctx.font= "140pt Segoe UI Emoji"
+        
+        ctx.fillStyle = 'rgb(255,255,255)';
+        ctx.strokeStyle = 'black';
+        //ctx.fillText(shrug,200,200)
+        def_font=" Courier"
+        ctx.font= "bold " +s+def_font
+     
+        ctx.textAlign="start"
+        def_col= 'rgb(128,192,255)';
+        ctx.fillStyle = def_col;
+        
+        //ctx.fillText(smiley,x,y)
+
+        se_state=0
+        pt=100*scl
+        s=pt.toString()+'px'
+        console.log(s)
+        console.log(Array.from(text1))
+        text=Array.from(text1)
+        if (text1.indexOf('se')>=0){
+            se_valid=1
+        }else{
+            se_valid=0
+        }
+          for (a=0;a<text.length;a++){
+            console.log(text[a], se_state)
+            if (text[a]>='A' && text[a]<='Z'){
+                text[a]=text[a].toLowerCase()
+            }
+            
+            
+            if (text[a]>'z'){
+                  emoji=text[a]
+                  while (a+1<text.length && text[a+1]>='z'){
+                      a+=1
+                      emoji+=text[a]
+                  }
+            ept=100*scl
+            ctx.font= ept.toString()+"px Segoe UI Emoji"
+            if (opt>0)
+                ctx.fillText(emoji,x,y)
+                ctx.strokeText(emoji,x,y)
+            x+=ctx.measureText(emoji).width-10*scl
+            
+        }else{
+            
+            ctx.font= "bold " +s+def_font
+            if (opt>0)
+                ctx.fillText(text[a],x,y)
+                ctx.strokeText(text[a],x,y)
+            x+=ctx.measureText(text[a]).width-10*scl
+            if (text[a]==' ')
+                x-=20*scl
+          }
+            
+        }
+        
+        //insert trump and re-render
+        scl=(x/500)
+        if (scl<1.0){
+            scl=1.0
+        }
+        return x
+    }
+    
+    function load(){
+        
+    var canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
+smiley = "\uD83D\uDE00";
+        var img1 = loadImage('train.jpg', main);
+        var img2 = loadImage('windows.png', main);
+        
+/*
+        
+var img2 = loadImage('e.png', main);
+
+        // composite now
+        ctx.drawImage(img1, 0, 0, 600, 600);
+
+        ctx.globalAlpha = 1.0;
+       */
+        ctx.globalAlpha = 1.0
+ctx.fillStyle = 'rgb(0,0,100)'; // sets the color to fill in the rectangle with
+ctx.fillRect(0, 0, 800, 400)
+        text1=document.getElementById('line1').value
+text2=document.getElementById('line2').value
+        
+        scl1=1.1
+        do{
+            scl1-=0.03
+        x=render_pass(0, text1, scl1)
+        }while (x>720)
+            
+        scl2=1.1
+        do{
+            scl2-=0.03
+        x=render_pass(0, text2, scl2)
+        }while (x>720)            
+                //insert trump and re-render
+        scl=Math.min(scl1,scl2)
+        
+  
+        ctx.drawImage(img1, 0, 0, 800,400 );
+        
+        x=render_pass(1, text1, scl)
+        x=render_pass(2, text2, scl)
+        /*
+        ctx.fillStyle = 'rgb(180,180,180)';
+        xx=x-140
+        if (xx<50) xx=50
+        ctx.font='bold 24px Arial'
+        
+       ctx.fillText('@SETrumps', xx, 280)
+       */
+       ctx.globalAlpha = 0.4
+        ctx.drawImage(img2, 0, 0, 800,400 );
+    }
+  
+    
+    
+    function save(){
+        
+        var canvas = document.getElementById("canvas");
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+window.location.href = image;
+    }
+     function save1(){
+        
+        var canvas = document.getElementById("canvas");
+var image = canvas.toDataURL("image/jpg");//, "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+window.location.href = image;
+    }
+</script>
+      <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-52689631-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+<body onload=load()>
+ <h2>Make your own SETrumps avatar
+    
+    </h2>   
+Line 1:
+    <input type="text" name="line1" id="line1" value="" maxlength="40" onChange="load()" onkeyup="load()" onmousemove="load()" onfocus="load()" ></input>
+    <br>
+Line 2: <input type="text" name="line2" id="line2" value="" maxlength="40" onChange="load()" onkeyup="load()" onmousemove="load()" onfocus="load()" ></input>
+    <br>
+    <a href="http://www.twitter.com/SETrumps">Follow SETrumps on Twitter!</a>
+    <br>
+    <a href="#" onclick="save()">Save image (desktop)</a>  <a href="#" onclick="save1()">Open image (phone)</a>
+    <br>
+(if no image is shown below then reload this page)    <br><br>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    
+    </div>    
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>cookies, blahblahblah, using Google Analytics to help understand how to make the site better - as with the rest of the site
+</body>
+</html>
