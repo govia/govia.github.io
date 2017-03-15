@@ -165,14 +165,16 @@ text2=document.getElementById('line2').value
         
         x=render_pass(1, text1, scl)
         x=render_pass(2, text2, scl)
-        /*
+        
         ctx.fillStyle = 'rgb(180,180,180)';
+        /*
         xx=x-140
         if (xx<50) xx=50
-        ctx.font='bold 24px Arial'
+          */
+        ctx.font='bold 22px Arial'
         
-       ctx.fillText('@SETrumps', xx, 280)
-       */
+       ctx.fillText('Let the DfT know your views on the franchise: http://govia.site/2019', 50, 280)
+     
        ctx.globalAlpha = 0.4
         ctx.drawImage(img2, 0, 0, 800,400 );
     }
@@ -206,14 +208,18 @@ window.location.href = image;
 </script>
 </head>
 <body onload=load()>
- <h2>Make your own SETrumps avatar
+ <h2>Help Govia design a train wrap for campaigning to get the 2019 South Eastern franchise
     
     </h2>   
 Line 1:
     <input type="text" name="line1" id="line1" value="" maxlength="40" onChange="load()" onkeyup="load()" onmousemove="load()" onfocus="load()" ></input>
     <br>
 Line 2: <input type="text" name="line2" id="line2" value="" maxlength="40" onChange="load()" onkeyup="load()" onmousemove="load()" onfocus="load()" ></input>
-    <br>
+    
+<p>
+<b>More importantly - please <a href="https://www.gov.uk/government/consultations/future-of-south-eastern-rail-services">fill in this consultation to put your views across to the Department for Transport for the new south eastern franchise from 2019</a></b>
+</p>
+<br>
     <a href="http://www.twitter.com/SETrumps">Follow SETrumps on Twitter!</a>
     <br>
     <a href="#" onclick="save()">Save image (desktop)</a>  <a href="#" onclick="save1()">Open image (phone)</a>
